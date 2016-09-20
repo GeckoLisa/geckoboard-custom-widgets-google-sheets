@@ -138,16 +138,13 @@ function widgetType(type, data) {
       }
     },
     MONITORING: function(items) {
-      return { 
-        item: items.map(function(item) {
-          return { 
-            status: item[0],
-            downTime: item[1] || 0,
-            responseTime: item[2] || 0,
-          }
-        })
-      }
-    }
+    var item = items[0];
+    return { 
+      status: item[0],
+      downTime: item[1] || '',
+      responseTime: item[2] || 0,
+    } 
+  }
   }
   return types[type](data);
 }
