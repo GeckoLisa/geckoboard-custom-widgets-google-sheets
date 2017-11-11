@@ -49,15 +49,17 @@ function makePayloads(widgets) {
 
 function splitWidgetData(data, widgetRows) {
   var widgets = [];
-  for (var i = 0; i < widgetRows.length; i++) {
-    var widget;
-    if (widgetRows[i + 1] === undefined) {
-      widget = data.slice(widgetRows[i]);
+  widgetRows.forEach(function(_, i) {
+    if (widgetRows[i + 1]) {
+      widgets.push(
+        data.slice(widgetRows[i], widgetRows[i + 1])
+      );
     } else {
-      var widget = data.slice(widgetRows[i], widgetRows[i + 1]);
+      widgets.push(
+        data.slice(widgetRows[i])
+      );
     }
-    widgets = widgets.concat([widget]);
-  }
+  });
   return widgets;
 }
                
@@ -66,11 +68,11 @@ function findWidgets(rows) {
   var column = rows.map(function(row) {
     return row[0];
   });
-  for (var i = 0; i < column.length; i++) {
-    if (column[i] === 'Widget') {
-      widgetIndexii = widgetIndexii.concat(i);
+  column.forEach(function(row, i) {
+    if (row === 'Widget') {
+      widgetIndexii.push(i);
     }
-  }
+  });
   return widgetIndexii;
 }
 
