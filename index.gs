@@ -147,6 +147,28 @@ function widgetType(type, data) {
         responseTime: item[2] || 0,
       } 
     },
+    MAP: function(items) {
+      return {
+        points: {
+          point: items.map(function(item) {
+            var latitude = item[0];
+            var longitude = item[1];
+            var size = item[2];
+            var color = item[3];
+            var point = {
+              latitude: latitude,
+              longitude: longitude,
+            }
+            if (size) {
+              point.size = size;
+            }
+            if (color) {
+              point.color = color;
+            }
+          })
+        }
+      }
+    },
   };
   return types[type](data);
 }
