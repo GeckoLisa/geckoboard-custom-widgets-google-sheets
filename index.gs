@@ -165,6 +165,7 @@ function widgetType(type, data) {
             if (color) {
               point.color = color;
             }
+            return point;
           })
         }
       }
